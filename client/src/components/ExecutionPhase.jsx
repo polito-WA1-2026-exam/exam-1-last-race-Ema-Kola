@@ -81,7 +81,7 @@ function ExecutionPhase({ segments,  onFinish }) {
         </Badge>
       </div>
 
-      <div className="mb-3" style={{ maxHeight: 340, overflowY: "auto" }}>
+      <div className="mb-3" style={{ maxHeight: 500, overflowY: "auto" }}>
         {shownSteps.map((step, i) => (
           <Card
             key={i}

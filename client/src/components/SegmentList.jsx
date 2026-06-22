@@ -14,28 +14,34 @@ function SegmentList({ segments, selected, onToggle }) {
           </thead>
           <tbody>
             {segments.map(({ station1, station2 }) => {
-              const key = canonicalKey(station1, station2);
-              const isSelected = selected.has(key);
-              return (
+                const key = canonicalKey(station1, station2);
+                const isSelected = selected.has(key);
+
+                return (
                 <tr
-                  key={key}
-                  onClick={() => onToggle(station1, station2)}
-                  style={{
+                    key={key}
+                    onClick={() => onToggle(station1, station2)}
+                    style={{
                     cursor: "pointer",
                     background: isSelected ? "#d1e7dd" : undefined,
-                  }}
+                    }}
                 >
-                  <td style={{ fontSize: 13, textAlign: "center" }}>
-                    {isSelected ? "✅" : ""}
-                  </td>
-                  <td style={{ fontSize: 13, fontWeight: isSelected ? 600 : 400 }}>
-                    {station1}
-                  </td>
-                  <td style={{ fontSize: 13, color: "#666" }}>— {station2}</td>
+                    <td style={{ width: 28, textAlign: "center" }}>
+                    {isSelected && "✓"}
+                    </td>
+
+                    <td
+                    style={{
+                        fontSize: 13,
+                        fontWeight: isSelected ? 600 : 400,
+                    }}
+                    >
+                    {station1} ↔ {station2}
+                    </td>
                 </tr>
-              );
+                );
             })}
-          </tbody>
+        </tbody>
         </table>
       </div>
     );

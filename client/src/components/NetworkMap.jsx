@@ -11,7 +11,7 @@ function NetworkMap({ mode }) {
         alt={alt}
         style={{
           width: "100%",
-          maxWidth: 640,
+          maxWidth: 580,
           border: "1px solid #dee2e6",
           borderRadius: 8,
           background: "#f8f9fa",
