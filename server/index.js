@@ -48,7 +48,7 @@ passport.deserializeUser((user, cb) => cb(null, user));
 
 app.use(
   session({
-    secret: "auroravia-metro-secret",
+    secret: "cinephile-metro-secret",
     resave: false,
     saveUninitialized: false,
   })
