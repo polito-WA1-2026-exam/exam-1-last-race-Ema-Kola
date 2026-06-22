@@ -1,23 +1,9 @@
-import { useState, useEffect, useRef } from "react";
 import { Button, Alert } from "react-bootstrap";
-import { saveGame } from "../api/game";
 
 function ResultPhase({ result, gameInfo, onPlayAgain }) {
-  const [saved, setSaved] = useState(false);
-  const [saveError, setSaveError] = useState("");
-  const hasSavedRef = useRef(false); // guards against Strict Mode double-invocation
-
   const { finalScore } = result;
   const { startStation, endStation } = gameInfo;
 
-  useEffect(() => {
-    if (hasSavedRef.current) return;
-    hasSavedRef.current = true;
-
-    saveGame(finalScore, startStation, endStation)
-      .then(() => setSaved(true))
-      .catch(() => setSaveError("Could not save your score this time."));
-  }, []);
 
   
   const message =
@@ -45,18 +31,6 @@ function ResultPhase({ result, gameInfo, onPlayAgain }) {
           Your route was <strong>invalid</strong>
           {result.reason ? `: ${result.reason}` : "."} Score set to zero.
         </Alert>
-      )}
-
-      {saveError && (
-        <Alert variant="danger" className="mt-2" style={{ maxWidth: 400, margin: "0 auto" }}>
-          {saveError}
-        </Alert>
-      )}
-
-      {saved && (
-        <p className="text-success mt-2" style={{ fontSize: 13 }}>
-          ✓ Score saved
-        </p>
       )}
 
       <Button

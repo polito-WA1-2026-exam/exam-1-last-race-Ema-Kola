@@ -164,35 +164,16 @@ app.post(
 
     const finalScore = Math.max(0, coins);
     req.session.currentGame = null;
+    try {
+      await saveGame(req.user.username, finalScore, startStation, endStation);
+    } catch {
+      return res.status(500).json({ error: "Failed to save game" });
+    }
 
     res.json({ valid: true, steps, finalScore });
   }
 );
 
-
-// POST /api/games  — save a completed game result
-app.post(
-  "/api/games",
-  isLoggedIn,
-  [
-    check("score").isInt({ min: 0 }),
-    check("startStation").notEmpty().isString(),
-    check("endStation").notEmpty().isString(),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty())
-      return res.status(400).json({ error: "Invalid game data" });
-
-    const { score, startStation, endStation } = req.body;
-    try {
-      await saveGame(req.user.username, score, startStation, endStation);
-      res.status(201).end();
-    } catch {
-      res.status(500).json({ error: "Failed to save game" });
-    }
-  }
-);
 
 // GET /api/ranking  — best score per user
 app.get("/api/ranking", isLoggedIn, async (req, res) => {

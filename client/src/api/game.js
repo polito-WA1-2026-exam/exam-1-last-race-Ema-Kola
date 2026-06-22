@@ -20,15 +20,6 @@ async function executeGame(segments) {
   throw new Error("Failed to execute game");
 }
 
-async function saveGame(score, startStation, endStation) {
-  const response = await fetch(`${BASE}/api/games`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    body: JSON.stringify({ score, startStation, endStation }),
-  });
-  if (!response.ok) throw new Error("Failed to save game");
-}
 
 async function getRanking() {
   const response = await fetch(`${BASE}/api/ranking`, {
@@ -38,4 +29,4 @@ async function getRanking() {
   throw new Error("Failed to load ranking");
 }
 
-export { startGame, executeGame, saveGame, getRanking };
+export { startGame, executeGame, getRanking };
